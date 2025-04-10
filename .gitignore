@@ -1,0 +1,70 @@
+# === OS Files ===
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Icon?
+Desktop.ini
+*.swp
+*.swo
+
+# === Ubuntu / Linux ===
+*~
+.cache
+.goutputstream-*
+.Trash-*
+
+# === Git ===
+*.orig
+*.rej
+
+# === Python ===
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.env
+.venv/
+ENV/
+venv/
+
+# === Node.js ===
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# === Compiled code ===
+*.class
+*.o
+*.so
+*.exe
+*.out
+*.a
+*.dll
+
+# === IDEs & Editors ===
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# === Logs ===
+*.log
+
+# === Misc ===
+dist/
+build/
+coverage/
+*.tgz
+*.tar.gz
+*.zip
+*.bak
+*.tmp
+
+# === Custom Secrets / Keys ===
+*.key
+*.pem
+*.crt
+*.env
+secrets.*
