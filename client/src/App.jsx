@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
+import { Toaster, toast } from "react-hot-toast";
 import "./App.css";
 
 function App() {
@@ -17,15 +18,18 @@ function App() {
 	const [submitting, setSubmitting] = useState(false);
 
 	const getAllUsers = async () => {
-		setIsLoading(true); // show a loading indicator before fetching
+		setIsLoading(true);
 		const res = await fetch("/users");
 		if (res.ok) {
 			const data = await res.json();
 			setAllUsers(data.users);
 			setError(null);
+			toast.success("Fetched all users");
 		} else {
-			setError(await res.json().msg);
-			setAllUsers([]); // to prevent keeping the old data,
+			const data = await res.json();
+			setError(data.msg);
+			setAllUsers([]);
+			toast.error(data.msg || "Failed to fetch users");
 		}
 		setIsLoading(false);
 	};
@@ -34,7 +38,7 @@ function App() {
 		getAllUsers();
 	}, []);
 
-	const handleAdd = async () => {
+	const handleAdd = () => {
 		setFormData({
 			userName: "",
 			fullName: "",
@@ -43,9 +47,9 @@ function App() {
 		});
 		setEditUserId(null);
 		setIsModalOpen(true);
-		getAllUsers();
 	};
-	const handleEdit = async (user) => {
+
+	const handleEdit = (user) => {
 		setFormData(user);
 		setEditUserId(user._id);
 		setIsModalOpen(true);
@@ -65,9 +69,11 @@ function App() {
 			setFormData({ userName: "", fullName: "", email: "", role: "" });
 			setEditUserId(null);
 			getAllUsers();
+			toast.success("User created");
 		} else {
 			const data = await res.json();
 			setError(data.msg);
+			toast.error(data.msg || "Failed to create user");
 		}
 		setSubmitting(false);
 	};
@@ -86,28 +92,35 @@ function App() {
 			setFormData({ userName: "", fullName: "", email: "", role: "" });
 			setEditUserId(null);
 			getAllUsers();
+			toast.success("User updated");
 		} else {
 			const data = await res.json();
 			setError(data.msg);
+			toast.error(data.msg || "Failed to update user");
 		}
 		setSubmitting(false);
 	};
 
-	
-	// Delete User 
 	const deleteUser = async (id) => {
 		const res = await fetch(`/users/${id}`, {
 			method: "DELETE",
 		});
 		if (res.ok) {
 			getAllUsers();
+			toast.success("User deleted");
 		} else {
 			const data = await res.json();
 			setError(data.msg);
+			toast.error(data.msg || "Failed to delete user");
 		}
 	};
 
-	return <> </>;
+	return (
+		<>
+			<Toaster position="top-right" />
+			{/* UI goes here */}
+		</>
+	);
 }
 
 export default App;
