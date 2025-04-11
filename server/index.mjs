@@ -58,7 +58,7 @@ app.post("/users", async (req, res) => {
 });
 
 // PATCH update user
-app.patch("users/:id", async (req, res) => {
+app.patch("/users/:id", async (req, res) => {
 	const { id } = req.params;
 	const updatedUser = await UserModel.findByIdAndUpdate(id, req.body, {
 		new: true,
