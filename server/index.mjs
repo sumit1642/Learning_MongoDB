@@ -23,7 +23,7 @@ const UserModel = mongoose.model("UserModel", userSchema);
 // Routes
 
 // GET all users
-app.get("/api/users", async (req, res) => {
+app.get("/users", async (req, res) => {
 	const allUsers = await UserModel.find();
 	if (allUsers.length === 0) {
 		return res.status(400).json({ msg: "No users exist. Try adding one." });
@@ -33,7 +33,7 @@ app.get("/api/users", async (req, res) => {
 });
 
 // POST create new user
-app.post("/api/users", async (req, res) => {
+app.post("/users", async (req, res) => {
 	try {
 		const { userName, fullName, email, role } = req.body;
 		const newUser = await UserModel.create({
@@ -58,7 +58,7 @@ app.post("/api/users", async (req, res) => {
 });
 
 // PATCH update user
-app.patch("/api/users/:id", async (req, res) => {
+app.patch("users/:id", async (req, res) => {
 	const { id } = req.params;
 	const updatedUser = await UserModel.findByIdAndUpdate(id, req.body, {
 		new: true,
@@ -72,7 +72,7 @@ app.patch("/api/users/:id", async (req, res) => {
 });
 
 // DELETE user
-app.delete("/api/users/:id", async (req, res) => {
+app.delete("/users/:id", async (req, res) => {
 	const { id } = req.params;
 	const deletedUser = await UserModel.findByIdAndDelete(id);
 
