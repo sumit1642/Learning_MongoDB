@@ -51,6 +51,27 @@ function App() {
 		setIsModalOpen(true);
 	};
 
+	const createUser = async () => {
+		setSubmitting(true);
+		const res = await fetch("/users", {
+			method: "POST",
+			body: JSON.stringify(formData),
+			headers: {
+				"Content-Type": "application/json",
+			},
+		});
+		if (res.ok) {
+			setIsModalOpen(false);
+			setFormData({ userName: "", fullName: "", email: "", role: "" });
+			setEditUserId(null);
+			getAllUsers();
+		} else {
+			const data = await res.json();
+			setError(data.msg);
+		}
+		setSubmitting(false);
+	};
+
 	return <> </>;
 }
 
