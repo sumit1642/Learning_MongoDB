@@ -92,6 +92,9 @@ function App() {
 		}
 		setSubmitting(false);
 	};
+
+	
+	// Delete User 
 	const deleteUser = async (id) => {
 		const res = await fetch(`/users/${id}`, {
 			method: "DELETE",
