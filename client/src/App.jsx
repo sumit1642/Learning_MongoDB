@@ -92,6 +92,17 @@ function App() {
 		}
 		setSubmitting(false);
 	};
+	const deleteUser = async (id) => {
+		const res = await fetch(`/users/${id}`, {
+			method: "DELETE",
+		});
+		if (res.ok) {
+			getAllUsers();
+		} else {
+			const data = await res.json();
+			setError(data.msg);
+		}
+	};
 
 	return <> </>;
 }
