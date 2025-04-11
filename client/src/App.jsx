@@ -34,6 +34,17 @@ function App() {
 		getAllUsers();
 	}, []);
 
+	const handleAdd = async () => {
+		setFormData({
+			userName: "",
+			fullName: "",
+			email: "",
+			role: "",
+		});
+		setEditUserId(null);
+		setIsModalOpen(true);
+		getAllUsers();
+	};
 
 	return <> </>;
 }
