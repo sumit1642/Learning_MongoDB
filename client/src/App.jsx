@@ -72,6 +72,27 @@ function App() {
 		setSubmitting(false);
 	};
 
+	const updateUser = async () => {
+		setSubmitting(true);
+		const res = await fetch(`/users/${editUserId}`, {
+			method: "PATCH",
+			body: JSON.stringify(formData),
+			headers: {
+				"Content-Type": "application/json",
+			},
+		});
+		if (res.ok) {
+			setIsModalOpen(false);
+			setFormData({ userName: "", fullName: "", email: "", role: "" });
+			setEditUserId(null);
+			getAllUsers();
+		} else {
+			const data = await res.json();
+			setError(data.msg);
+		}
+		setSubmitting(false);
+	};
+
 	return <> </>;
 }
 
