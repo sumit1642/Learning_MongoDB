@@ -45,6 +45,11 @@ function App() {
 		setIsModalOpen(true);
 		getAllUsers();
 	};
+	const handleEdit = async (user) => {
+		setFormData(user);
+		setEditUserId(user._id);
+		setIsModalOpen(true);
+	};
 
 	return <> </>;
 }
